@@ -2,8 +2,8 @@
 # lab0 is pre-lab / computing environment.
 # This information will not be used in determining your grade.
 # This information will be used to adjust the workload.
-lab0 0
-lab1 0
+lab0 3
+lab1 6
 lab2 0
 lab3 0
 lab4 0

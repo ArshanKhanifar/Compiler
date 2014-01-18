@@ -104,7 +104,12 @@ public final class WProgram implements Examinable {
 	@Override
 	public String toString() {
 // TODO: 6 lines snipped
-throw new ece351.util.Todo351Exception();
+		String temp = "";
+		for (final Waveform w : waveforms) {
+			temp += w + System.getProperty("line.separator");
+		}
+		return temp;
+//throw new ece351.util.Todo351Exception();
 	}
 
 	/**
