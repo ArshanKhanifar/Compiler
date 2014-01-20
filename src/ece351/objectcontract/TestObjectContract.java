@@ -15,6 +15,7 @@ public final class TestObjectContract extends TestObjectContractBase {
 		return new Object() {
 			public boolean equals(Object ob) { 
 // TODO: 1 lines snipped
+throw new ece351.util.Todo351Exception();
 			}
 		};
 	}
@@ -28,6 +29,7 @@ public final class TestObjectContract extends TestObjectContractBase {
 		return new Object() {
 			public boolean equals(Object ob) { 
 // TODO: 1 lines snipped
+throw new ece351.util.Todo351Exception();
 			}
 		};
 	}
@@ -42,6 +44,7 @@ public final class TestObjectContract extends TestObjectContractBase {
 			private boolean flag = true;
 			public boolean equals(Object ob) { 
 // TODO: 2 lines snipped
+throw new ece351.util.Todo351Exception();
 			}
 		};
 	}
@@ -53,6 +56,7 @@ public final class TestObjectContract extends TestObjectContractBase {
 	SymmetryBreaker[] constructSymmetryBreakers() {
 		final SymmetryBreaker[] result = new SymmetryBreaker[2];
 // TODO: 3 lines snipped
+throw new ece351.util.Todo351Exception();
 	}
 
 	
@@ -64,6 +68,7 @@ public final class TestObjectContract extends TestObjectContractBase {
 		final double epsilon6 = TestObjectContractBase.TransitivityBreaker.epsilon * 0.6d;
 		final TransitivityBreaker[] result = new TransitivityBreaker[3];
 // TODO: 4 lines snipped
+throw new ece351.util.Todo351Exception();
 	}
 
 	/**
@@ -76,6 +81,7 @@ public final class TestObjectContract extends TestObjectContractBase {
 	Object[] constructHashcodeConsistencyViolators() {
 		final Object[] result = new Object[2];
 // TODO: 3 lines snipped
+throw new ece351.util.Todo351Exception();
 	}
 
 	/**
@@ -85,6 +91,7 @@ public final class TestObjectContract extends TestObjectContractBase {
 	@Override
 	boolean checkNotEqualsNull(final Object obj) {
 // TODO: 1 line snipped
+throw new ece351.util.Todo351Exception();
 	}
 
 	/**
@@ -94,6 +101,7 @@ public final class TestObjectContract extends TestObjectContractBase {
 	@Override
 	boolean checkEqualsIsReflexive(final Object obj) {
 // TODO: 1 line snipped
+throw new ece351.util.Todo351Exception();
 	}
 
 	/**
@@ -106,6 +114,7 @@ public final class TestObjectContract extends TestObjectContractBase {
 	@Override
 	boolean checkEqualsIsSymmetric(final Object o1, final Object o2) {
 // TODO: 1 line snipped
+throw new ece351.util.Todo351Exception();
 	}
 
 	/**
@@ -118,10 +127,12 @@ public final class TestObjectContract extends TestObjectContractBase {
 	@Override
 	boolean checkEqualsIsTransitive(final Object o1, final Object o2, final Object o3) {
 // TODO: 1 line snipped
+throw new ece351.util.Todo351Exception();
 	}
 
 	@Override
 	boolean checkHashcodeIsConsistent(final Object o1, final Object o2) {
 // TODO: 5 lines snipped
+throw new ece351.util.Todo351Exception();
 	}
 }
