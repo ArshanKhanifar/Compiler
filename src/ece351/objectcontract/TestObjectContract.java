@@ -14,9 +14,7 @@ public final class TestObjectContract extends TestObjectContractBase {
 		// this is an anonymous inner class that is a subclass of Object
 		return new Object() {
 			public boolean equals(Object ob) { 
-				// <snip>
-				return false; 
-				// </snip>
+// TODO: 1 lines snipped
 			}
 		};
 	}
@@ -29,9 +27,7 @@ public final class TestObjectContract extends TestObjectContractBase {
 		// this is an anonymous inner class that is a subclass of Object
 		return new Object() {
 			public boolean equals(Object ob) { 
-				// <snip>
-				return true; 
-				// </snip>
+// TODO: 1 lines snipped
 			}
 		};
 	}
@@ -45,10 +41,7 @@ public final class TestObjectContract extends TestObjectContractBase {
 		return new Object() {
 			private boolean flag = true;
 			public boolean equals(Object ob) { 
-				// <snip>
-				flag = !flag;
-				return flag; 
-				// </snip>
+// TODO: 2 lines snipped
 			}
 		};
 	}
@@ -59,11 +52,7 @@ public final class TestObjectContract extends TestObjectContractBase {
 	@Override
 	SymmetryBreaker[] constructSymmetryBreakers() {
 		final SymmetryBreaker[] result = new SymmetryBreaker[2];
-		// <snip>
-		result[0] = new SymmetryBreaker(1, null);
-		result[1] = new SymmetryBreaker(1, result[0]);
-		return result;
-		// </snip>
+// TODO: 3 lines snipped
 	}
 
 	
@@ -74,12 +63,7 @@ public final class TestObjectContract extends TestObjectContractBase {
 	TransitivityBreaker[] constructTransitivityBreakers() {
 		final double epsilon6 = TestObjectContractBase.TransitivityBreaker.epsilon * 0.6d;
 		final TransitivityBreaker[] result = new TransitivityBreaker[3];
-		// <snip>
-		result[0] = new TransitivityBreaker(0.0d);
-		result[1] = new TransitivityBreaker(0.0d + epsilon6);
-		result[2] = new TransitivityBreaker(0.0d + epsilon6 + epsilon6);
-		return result;
-		// </snip>
+// TODO: 4 lines snipped
 	}
 
 	/**
@@ -91,11 +75,7 @@ public final class TestObjectContract extends TestObjectContractBase {
 	@Override
 	Object[] constructHashcodeConsistencyViolators() {
 		final Object[] result = new Object[2];
-		// <snip>
-		result[0] = constructAlwaysTrue();
-		result[1] = constructAlwaysTrue();
-		return result;
-		// </snip>
+// TODO: 3 lines snipped
 	}
 
 	/**
@@ -104,9 +84,7 @@ public final class TestObjectContract extends TestObjectContractBase {
 	 */
 	@Override
 	boolean checkNotEqualsNull(final Object obj) {
-		// <snip>
-		return !obj.equals(null);
-		// </snip>
+// TODO: 1 line snipped
 	}
 
 	/**
@@ -115,9 +93,7 @@ public final class TestObjectContract extends TestObjectContractBase {
 	 */
 	@Override
 	boolean checkEqualsIsReflexive(final Object obj) {
-		// <snip>
-		return obj.equals(obj);
-		// </snip>
+// TODO: 1 line snipped
 	}
 
 	/**
@@ -129,9 +105,7 @@ public final class TestObjectContract extends TestObjectContractBase {
 	 */
 	@Override
 	boolean checkEqualsIsSymmetric(final Object o1, final Object o2) {
-		// <snip>
-		return o1.equals(o2) == o2.equals(o1);
-		// </snip>
+// TODO: 1 line snipped
 	}
 
 	/**
@@ -143,19 +117,11 @@ public final class TestObjectContract extends TestObjectContractBase {
 	 */
 	@Override
 	boolean checkEqualsIsTransitive(final Object o1, final Object o2, final Object o3) {
-		// <snip>
-		return o1.equals(o2) && o2.equals(o3) && o1.equals(o3);
-		// </snip>
+// TODO: 1 line snipped
 	}
 
 	@Override
 	boolean checkHashcodeIsConsistent(final Object o1, final Object o2) {
-		// <snip>
-		if (o1.equals(o2)) {
-			return o1.hashCode() == o2.hashCode();
-		} else {
-			return true;
-		}
-		// </snip>
+// TODO: 5 lines snipped
 	}
 }
