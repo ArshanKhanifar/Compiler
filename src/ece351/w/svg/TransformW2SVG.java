@@ -87,12 +87,48 @@ public final class TransformW2SVG {
 				// draw the horizontal line
 				// get ready for the next bit
 // TODO: 17 lines snipped
-throw new ece351.util.Todo351Exception();
+				
+				if(bit == "0")
+				{
+					if(y_prev == y_mid - y_off && y_pos == y_mid + y_off)
+						out.println(Line.toSVG(x, y_pos, x, y_pos));
+					else
+					{
+						y_prev = y_mid - y_off;
+						y_pos = y_mid + y_off;
+						if(x == 100)
+							out.println(Line.toSVG(x, y_mid, x, y_pos));
+						else
+						out.println(Line.toSVG(x, y_prev, x, y_pos));
+					}
+						
+				}
+				else if(bit == "1")
+				{
+					if(y_prev == y_mid + y_off && y_pos == y_mid - y_off)
+						out.println(Line.toSVG(x, y_pos, x, y_pos));
+					else
+					{
+						y_prev = y_mid + y_off;
+						y_pos = y_mid - y_off;
+						if(x == 100)
+							out.println(Line.toSVG(x, y_mid, x, y_pos));
+						else
+						out.println(Line.toSVG(x, y_prev, x, y_pos));
+					}
+						
+				}
+				out.println(Line.toSVG(x, y_pos , x+WIDTH, y_pos));
+				x = x + WIDTH;
+				
+//throw new ece351.util.Todo351Exception();
 			}
-			
+			y_mid += 200;
+			y_prev = y_mid;
+			y_pos = y_mid;
 			// advance the y position for the next pin
 // TODO: 4 lines snipped
-throw new ece351.util.Todo351Exception();
+//throw new ece351.util.Todo351Exception();
 
 		}
 
