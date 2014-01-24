@@ -130,7 +130,7 @@ public final class TestObjectContract extends TestObjectContractBase {
 	@Override
 	boolean checkEqualsIsSymmetric(final Object o1, final Object o2) {
 // TODO: 1 line snipped
-		return o1.equals(o2) == o2.equals(o1);
+		return o2.equals(o1) == o1.equals(o2);
 //throw new ece351.util.Todo351Exception();
 	}
 
@@ -144,7 +144,7 @@ public final class TestObjectContract extends TestObjectContractBase {
 	@Override
 	boolean checkEqualsIsTransitive(final Object o1, final Object o2, final Object o3) {
 // TODO: 1 line snipped
-		return o1.equals(o2) && o2.equals(o3) && o1.equals(o3);
+		return o1.equals(o2) && o1.equals(o3) && o2.equals(o3);
 //throw new ece351.util.Todo351Exception();
 	}
 
