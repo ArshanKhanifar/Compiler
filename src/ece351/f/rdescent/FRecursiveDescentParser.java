@@ -63,11 +63,71 @@ public final class FRecursiveDescentParser implements VConstants {
         return new AssignmentStatement(var, expr);
     }
     
-    Expr expr() { throw new ece351.util.Todo351Exception(); } // TODO
-    Expr term() { throw new ece351.util.Todo351Exception(); } // TODO
-    Expr factor() { throw new ece351.util.Todo351Exception(); } // TODO
-    VarExpr var() { throw new ece351.util.Todo351Exception(); } // TODO
-    ConstantExpr constant() { throw new ece351.util.Todo351Exception(); } // TODO
+    Expr expr() { 
+    	Expr left = term();
+    	if(lexer.inspect("or"))
+    	{
+    		lexer.consume("or");
+    		Expr right = factor();
+    		return new OrExpr(left,right);
+    	}
+    	else
+    		return left;
+    	}
+    	//throw new ece351.util.Todo351Exception(); } // TODO
+    Expr term() { 
+    	Expr left = factor();
+    	if(lexer.inspect("and"))
+    	{
+    		lexer.consume("and");
+    		Expr right = factor();
+    		return new AndExpr(left,right);
+    	}
+    	else
+    		return left;
+    	//throw new ece351.util.Todo351Exception(); 
+    	} // TODO
+    Expr factor() { 
+    	if(lexer.inspect(";","<="))
+			return null;
+    	else if(lexer.inspect("("))
+		{
+			lexer.consume("(");
+			Expr expression = expr();
+			if(lexer.inspect(")"))
+			{
+	    		lexer.consume(")");
+	    		return expression;
+			}
+			return expression;
+		}
+    	else if(lexer.inspect("not"))
+		{
+			lexer.consume("not");
+				return new NotExpr(factor());
+		}
+		else if(lexer.inspectID())
+		{
+			return var();
+		}
+		else if(peekConstant() == true)
+		{
+			return constant();
+		}
+    	return null;
+    }
+    	//throw new ece351.util.Todo351Exception(); } // TODO
+    VarExpr var() { 
+    	return new VarExpr(lexer.consumeID());
+    	//throw new ece351.util.Todo351Exception(); } // TODO
+    }
+    ConstantExpr constant() { 
+    	lexer.consume("'");
+		ConstantExpr constant = ConstantExpr.make(lexer.consume("0","1"));
+		lexer.consume("'");
+		return constant;
+    	//throw new ece351.util.Todo351Exception(); } // TODO
+    }
 // TODO: 56 lines snipped
 
     // helper functions

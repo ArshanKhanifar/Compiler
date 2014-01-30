@@ -30,7 +30,8 @@ public abstract class UnaryExpr extends Expr {
 		final UnaryExpr that = (UnaryExpr) obj;
 		// compare field values using e.examine(x,y)
 // TODO: 1 lines snipped
-throw new ece351.util.Todo351Exception();
+		return e.examine(this.expr, that.expr);
+//throw new ece351.util.Todo351Exception();
     }
     
     @Override
@@ -52,7 +53,8 @@ throw new ece351.util.Todo351Exception();
 	@Override
 	public final String toString() {
 // TODO: 1 lines snipped
-throw new ece351.util.Todo351Exception();
+		return "( " + operator() + " ( " + this.expr + " ) )";
+//throw new ece351.util.Todo351Exception();
 	}
 
 }

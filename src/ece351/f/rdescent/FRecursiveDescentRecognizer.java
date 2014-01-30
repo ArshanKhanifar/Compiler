@@ -42,15 +42,52 @@ public final class FRecursiveDescentRecognizer implements VConstants {
     }
     
     // STUB2: void expr() { throw new ece351.util.Todo351Exception(); } // TODO
-    void expr() { throw new ece351.util.Todo351Exception(); } // TODO
+    void expr() { 
+    	if(lexer.inspect("or"))
+    		lexer.consume("or");
+    	term();
+    	//throw new ece351.util.Todo351Exception(); 
+    	} // TODO
     // STUB2: void term() { throw new ece351.util.Todo351Exception(); } // TODO
-    void term() { throw new ece351.util.Todo351Exception(); } // TODO
+    void term() { 
+    	if(lexer.inspect("and"))
+    		lexer.consume("and");
+    	factor();
+    	//throw new ece351.util.Todo351Exception(); 
+    	} // TODO
 	// STUB2: void factor() { throw new ece351.util.Todo351Exception(); } // TODO
-	void factor() { throw new ece351.util.Todo351Exception(); } // TODO
+	void factor() { 
+		if(lexer.inspect(";","<="))
+			return;
+		if(lexer.inspect("(", ")", "not"))
+		{
+			lexer.consume("(", ")", "not");
+			expr();
+		}
+		if(lexer.inspectID())
+		{
+			var();
+			expr();
+		}
+		else if(peekConstant() == true)
+		{
+			constant();
+			expr();
+		}
+		//throw new ece351.util.Todo351Exception(); } // TODO
+	}
 	// STUB2: void var() { throw new ece351.util.Todo351Exception(); } // TODO
-	void var() { throw new ece351.util.Todo351Exception(); } // TODO
+	void var() { 
+    		lexer.consumeID();
+		//throw new ece351.util.Todo351Exception(); 
+		} // TODO
 	// STUB2: void constant() { throw new ece351.util.Todo351Exception(); } // TODO
-	void constant() { throw new ece351.util.Todo351Exception(); } // TODO
+	void constant() {
+		lexer.consume("'");
+		lexer.consume("0", "1");
+		lexer.consume("'");
+		//throw new ece351.util.Todo351Exception(); } // TODO
+	}
 
 // TODO: 45 lines snipped
 

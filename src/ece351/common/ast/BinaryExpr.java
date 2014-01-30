@@ -34,7 +34,8 @@ public abstract class BinaryExpr extends Expr {
 	@Override 
 	public final String toString() {
 // TODO: 9 lines snipped
-throw new ece351.util.Todo351Exception();
+		return "(" + left + " " + operator() + " " + right + ")";
+//throw new ece351.util.Todo351Exception();
 	}
 	
 	public final int hashCode() {

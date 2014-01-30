@@ -122,7 +122,9 @@ public final class FProgram implements Examinable {
 		// compare field values using Examiner.orderedExamination()
 		// no significant differences
 // TODO: 4 lines snipped
-throw new ece351.util.Todo351Exception();
+		Examiner e = Examiner.Equals;
+		return Examiner.orderedExamination(e, this.formulas, that.formulas);
+//throw new ece351.util.Todo351Exception();
 	}
 	
 	@Override
@@ -135,7 +137,9 @@ throw new ece351.util.Todo351Exception();
 		// compare field values using Examiner.unorderedExamination()
 		// no significant differences
 // TODO: 4 lines snipped
-throw new ece351.util.Todo351Exception();
+		Examiner e = Examiner.Isomorphic;
+		return Examiner.unorderedExamination(e, this.formulas, that.formulas); 
+//throw new ece351.util.Todo351Exception();
 	}
 
 	/**

@@ -69,7 +69,9 @@ public final class AssignmentStatement extends Statement implements Examinable {
 		// TODO: compare field values
 		// no significant differences
 // TODO: 5 lines snipped
-throw new ece351.util.Todo351Exception();
+		return ((this.expr.isomorphic(that.expr)) 
+				&& (this.outputVar.isomorphic(that.outputVar)));
+//throw new ece351.util.Todo351Exception();
 	}
 
 	/**

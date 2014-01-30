@@ -50,7 +50,9 @@ public final class VarExpr extends Expr {
 		final VarExpr that = (VarExpr) obj;
 		// compare field values
 // TODO: 1 lines snipped
-throw new ece351.util.Todo351Exception();
+		return (that.identifier.equals(this.identifier) 
+				&& this.identifier.equals(that.identifier));
+//throw new ece351.util.Todo351Exception();
 	}
 
 	public String operator() {
