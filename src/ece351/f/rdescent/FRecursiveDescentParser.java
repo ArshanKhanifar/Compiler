@@ -65,25 +65,24 @@ public final class FRecursiveDescentParser implements VConstants {
     
     Expr expr() { 
     	Expr left = term();
-    	if(lexer.inspect("or"))
+    	while(lexer.inspect("or"))
     	{
     		lexer.consume("or");
-    		Expr right = factor();
-    		return new OrExpr(left,right);
+    		Expr right = term();
+    		left =  new OrExpr(left,right);
+  
     	}
-    	else
-    		return left;
+    	return left;
     	}
     	//throw new ece351.util.Todo351Exception(); } // TODO
     Expr term() { 
     	Expr left = factor();
-    	if(lexer.inspect("and"))
+    	while(lexer.inspect("and"))
     	{
     		lexer.consume("and");
     		Expr right = factor();
-    		return new AndExpr(left,right);
+    		left = new AndExpr(left,right);
     	}
-    	else
     		return left;
     	//throw new ece351.util.Todo351Exception(); 
     	} // TODO

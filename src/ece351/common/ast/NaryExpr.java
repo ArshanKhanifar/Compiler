@@ -156,7 +156,17 @@ public abstract class NaryExpr extends Expr {
 		// if they aren't the same elements in the same order return false
 		// no significant differences
 // TODO: 16 lines snipped
-throw new ece351.util.Todo351Exception();
+		if(that.children.size() == this.children.size())
+		{
+			if(e.orderedEquals(this.children, that.children))
+				return true;
+			else
+				return false;
+				
+		}
+		else
+			return false;
+//throw new ece351.util.Todo351Exception();
 	}
 
 	
@@ -194,7 +204,17 @@ throw new ece351.util.Todo351Exception();
 		// remove children to merge from result by using filter
 		// merge in the grandchildren
 // TODO: 10 lines snipped
-throw new ece351.util.Todo351Exception();
+		ImmutableList<Expr> emptylist = ImmutableList.of();
+		NaryExpr grandchildren = newNaryExpr(emptylist);
+		Examiner e = Examiner.Isomorphic;
+		NaryExpr result = this;
+		grandchildren = this.filter(this.getClass(), true);
+		result = result.removeAll(grandchildren.children, e.Equals);
+		for(final Expr expr: grandchildren.children)
+			result = result.appendAll((((NaryExpr)expr).children));
+		return result;
+		
+//throw new ece351.util.Todo351Exception();
 	}
 
 
@@ -204,7 +224,18 @@ throw new ece351.util.Todo351Exception();
     		// no changes
     		// removed some duplicates
 // TODO: 20 lines snipped
-throw new ece351.util.Todo351Exception();
+    	ImmutableList<Expr> remove = ImmutableList.of();
+    	Examiner e = Examiner.Equals;
+    	NaryExpr result  = newNaryExpr(remove);
+    	for(int i = 0; i < this.children.size(); i++)
+    	{
+    		if(!remove.contains(this.children.get(i)))
+    		{
+    			remove = remove.append(this.children.get(i));
+    		}
+    	}
+    	return newNaryExpr(remove);
+//throw new ece351.util.Todo351Exception();
     }
 
 	private NaryExpr removeIdentityElements() {
@@ -214,21 +245,100 @@ throw new ece351.util.Todo351Exception();
     		// return a new list with a single identity element
     		// normal return
 // TODO: 12 lines snipped
-throw new ece351.util.Todo351Exception();
+		ImmutableList<Expr> list = this.children;
+		NaryExpr result = this;
+		Examiner e = Examiner.Equivalent;
+		if(this.children.size() == 1)
+		{
+			return this;
+		}
+		else if(this.children.contains(getIdentityElement()))
+		{
+			if(result.filter(getIdentityElement(), e, false).children.size() != 0)
+				result = result.filter(getIdentityElement(), e, false);
+			else return this;
+		}
+		return result;
+//throw new ece351.util.Todo351Exception();
     }
 
     private NaryExpr simpleAbsorption() {
 		// (x.y) + x ... = x ...
 		// check if there are any conjunctions that can be removed
 // TODO: 21 lines snipped
-throw new ece351.util.Todo351Exception();
+    	NaryExpr result = this;
+    	Examiner e = Examiner.Equivalent;
+    	if(this.getClass().equals(NaryOrExpr.class))
+    	{
+    		for(Expr expr: this.children)
+    		{
+    			if(expr.getClass().equals(NaryAndExpr.class))
+    			{
+    				result = result.filter(expr, e, false);
+    				for(Expr expr_2: ((NaryAndExpr) expr).children)
+    					if(result.children.contains(expr_2))
+    					{
+    						return result;
+    					}
+    			}
+    		}
+    	}
+    	else if(this.getClass().equals(NaryAndExpr.class))
+    	{
+    		for(Expr expr: this.children)
+    		{
+    			if(expr.getClass().equals(NaryOrExpr.class))
+    			{
+    				result = result.filter(expr, e, false);
+    				for(Expr expr_2: ((NaryOrExpr) expr).children)
+    					if(result.children.contains(expr_2))
+    					{
+    						return result;
+    					}
+    			}
+    		}
+    	}
+    	return this;
+//throw new ece351.util.Todo351Exception();
 	}
 
 	private NaryExpr subsetAbsorption() {
 		// check if there are any conjunctions that are supersets of others
 		// e.g., ( a . b . c ) + ( a . b ) = a . b
 // TODO: 30 lines snipped
-throw new ece351.util.Todo351Exception();
+    	NaryExpr result = this;
+    	NaryExpr children = this;
+    	Examiner e = Examiner.Equivalent;
+    	if(this.getClass().equals(NaryOrExpr.class))
+    	{
+    		result = result.filter(NaryAndExpr.class, true);
+    		for(int i = 0; i < result.children.size(); i++)
+    		{
+    			for(int j = i + 1; j < result.children.size(); j++)
+    				
+    				if(((NaryExpr)result.children.get(i)).children.containsAll(((NaryExpr)result.children.get(j)).children))
+    				{
+    					children = children.filter(result.children.get(i), e, false);
+    				}
+    		}
+    		return children;
+    	}
+    	else if(this.getClass().equals(NaryAndExpr.class))
+    	{
+    		result = result.filter(NaryOrExpr.class, true);
+    		for(int i = 0; i < result.children.size(); i++)
+    		{
+    			for(int j = i + 1; j < result.children.size(); j++)
+    				
+    				if(((NaryExpr)result.children.get(i)).children.containsAll(((NaryExpr)result.children.get(j)).children))
+    				{
+    					children = children.filter(result.children.get(i), e, false);
+    				}
+    		}
+    		return children;
+    	}
+		return this;
+//throw new ece351.util.Todo351Exception();
 	}
 
 	private Expr singletonify() {
@@ -243,7 +353,45 @@ throw new ece351.util.Todo351Exception();
 				// return absorbing element
 		// nothing to do, return self
 // TODO: 24 lines snipped
-throw new ece351.util.Todo351Exception();
+		Examiner e = Examiner.Equals;
+		ImmutableList<Expr> childs = ImmutableList.of();
+		//NaryExpr result = newNaryExpr(emptylist);
+		if(this.children.size() == 1)
+			return this.children.get(0);
+		
+		if(this.children.contains(getAbsorbingElement()))
+		{
+				return getAbsorbingElement();
+		}
+		else
+			for(Expr expr: this.children)
+				if(expr.getClass().equals(NotExpr.class))
+				{
+						if(this.children.contains(((NotExpr)expr).expr))
+							return getAbsorbingElement();
+				}
+//		else if(this.getClass().equals(NaryAndExpr.class))
+//		{
+//			if(this.children.contains(ConstantExpr.FalseExpr))
+//				result = result.append(ConstantExpr.FalseExpr);
+//			else if(this.children.contains(ConstantExpr.TrueExpr))
+//			{
+//				result = this.filter(ConstantExpr.TrueExpr, e, false);
+//			}
+//			else if(this.children.contains(this.getAbsorbingElement()))
+//				return this.getAbsorbingElement();
+//		}
+//		else if(this.getClass().equals(NaryOrExpr.class))
+//		{
+//			if(this.children.contains(ConstantExpr.FalseExpr))
+//				result = result.appendAll(this.filter(ConstantExpr.FalseExpr, e, false).children);
+//			else if(this.children.contains(ConstantExpr.TrueExpr))
+//				result = result.append(ConstantExpr.TrueExpr);
+//			else if(this.children.contains(this.getAbsorbingElement()))
+//				return this.getAbsorbingElement();
+//		}
+		return this;
+//throw new ece351.util.Todo351Exception();
 	}
 
 	/**

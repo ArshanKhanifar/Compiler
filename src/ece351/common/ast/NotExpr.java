@@ -24,7 +24,15 @@ public final class NotExpr extends UnaryExpr{
     		// nothing changed
     		// something changed
 // TODO: 19 lines snipped
-throw new ece351.util.Todo351Exception();
+    	if(localexpr.getClass().equals(NotExpr.class))
+    		return ((NotExpr)localexpr).expr;
+    	else if(localexpr.equals(ConstantExpr.TrueExpr))
+    		return ConstantExpr.FalseExpr;
+    	else if(localexpr.equals(ConstantExpr.FalseExpr))
+    		return ConstantExpr.TrueExpr;
+    	else
+    		return new NotExpr(localexpr);
+//throw new ece351.util.Todo351Exception();
     }
 	
     public Expr accept(final ExprVisitor v){

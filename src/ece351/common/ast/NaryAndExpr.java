@@ -29,13 +29,15 @@ public final class NaryAndExpr extends NaryExpr {
 	@Override
 	public ConstantExpr getIdentityElement() {
 // TODO: 1 lines snipped
-throw new ece351.util.Todo351Exception();
+		return ConstantExpr.TrueExpr;
+//throw new ece351.util.Todo351Exception();
 	}
 	
 	@Override
 	public ConstantExpr getAbsorbingElement() {
 // TODO: 1 lines snipped
-throw new ece351.util.Todo351Exception();
+		return ConstantExpr.FalseExpr;
+//throw new ece351.util.Todo351Exception();
 	}
 	
 	@Override
