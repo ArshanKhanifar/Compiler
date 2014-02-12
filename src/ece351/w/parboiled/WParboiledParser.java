@@ -37,7 +37,13 @@ public /*final*/ class WParboiledParser extends BaseParser351 {
     public Rule Program() {
         		// push empty WProgram
 // TODO: 5 lines snipped
-throw new ece351.util.Todo351Exception();
+		return Sequence(
+		push(ImmutableList.of()),
+		Sequence(ZeroOrMore(Waveform()), 
+				push(new WProgram((ImmutableList<Waveform>)pop())), 
+				W0(), 
+				EOI));
+//throw new ece351.util.Todo351Exception();
     }
 
 	/**
@@ -50,7 +56,17 @@ throw new ece351.util.Todo351Exception();
     			// swap, pop, append, push
     			// peek() = [WProgram]
 // TODO: 18 lines snipped
-throw new ece351.util.Todo351Exception();
+    	return Sequence(Name(),
+    			swap(),
+    			W0(), 
+    			AnyOf(":"), 
+    			BitString(),
+    			swap(),
+    			AnyOf(";"),
+    			W0(),
+    			push(((ImmutableList<Waveform>)pop()).append(new Waveform((ImmutableList)pop(),(String)pop()))));
+    	
+//throw new ece351.util.Todo351Exception();
     }
 
     /**
@@ -58,7 +74,8 @@ throw new ece351.util.Todo351Exception();
      */
     public Rule Name() {
 // TODO: 4 lines snipped
-throw new ece351.util.Todo351Exception();
+    	return Sequence(ZeroOrMore(Letter()),push(match()));
+//throw new ece351.util.Todo351Exception();
     }
     
     /**
@@ -67,7 +84,8 @@ throw new ece351.util.Todo351Exception();
      */
     public Rule Letter() {
 // TODO: 1 lines snipped
-throw new ece351.util.Todo351Exception();
+    	return FirstOf(CharRange('A','Z'), CharRange('a','z'));
+//throw new ece351.util.Todo351Exception();
     }
 
     /**
@@ -75,7 +93,8 @@ throw new ece351.util.Todo351Exception();
      */
     public Rule BitString() {
 // TODO: 1 lines snipped
-throw new ece351.util.Todo351Exception();
+    	return Sequence(push(ImmutableList.of()),ZeroOrMore(W0(),Bit(), W0()));
+//throw new ece351.util.Todo351Exception();
     }
     
     /**
@@ -85,7 +104,9 @@ throw new ece351.util.Todo351Exception();
     public Rule Bit() {   
         		// peek() = [Waveform, WProgram]
 // TODO: 5 lines snipped
-throw new ece351.util.Todo351Exception();
+    	return Sequence(AnyOf("01"),
+    			push(((ImmutableList)pop()).append(match())));
+//throw new ece351.util.Todo351Exception();
     }
 
 }

@@ -39,7 +39,8 @@ public /*final*/ class WParboiledRecognizer extends BaseParser351 {
 	@Override
 	public Rule Program() {
 // TODO: 1 lines snipped
-throw new ece351.util.Todo351Exception();
+		return Sequence(ZeroOrMore(Waveform()), W0(), EOI);
+//throw new ece351.util.Todo351Exception();
 	}
     
 	/**
@@ -47,7 +48,8 @@ throw new ece351.util.Todo351Exception();
 	 */
     public Rule Waveform() {
 // TODO: 1 lines snipped
-throw new ece351.util.Todo351Exception();
+    	return Sequence(Name(),W0(), AnyOf(":"), BitString(), AnyOf(";"), W0());
+//throw new ece351.util.Todo351Exception();
     }
 
     /**
@@ -56,7 +58,8 @@ throw new ece351.util.Todo351Exception();
      */
     public Rule Name() {
 // TODO: 1 lines snipped
-throw new ece351.util.Todo351Exception();
+    	return ZeroOrMore(Letter());
+//throw new ece351.util.Todo351Exception();
     }
 
     /**
@@ -65,7 +68,8 @@ throw new ece351.util.Todo351Exception();
      */
     public Rule Letter() {
 // TODO: 1 lines snipped
-throw new ece351.util.Todo351Exception();
+    	return FirstOf(CharRange('A','Z'), CharRange('a','z'));
+//throw new ece351.util.Todo351Exception();
     }
 
     /**
@@ -73,7 +77,8 @@ throw new ece351.util.Todo351Exception();
      */
     public Rule BitString() {
 // TODO: 1 lines snipped
-throw new ece351.util.Todo351Exception();
+    	return ZeroOrMore(W0(),Bit(), W0());
+//throw new ece351.util.Todo351Exception();
     }
     
     /**
@@ -82,7 +87,8 @@ throw new ece351.util.Todo351Exception();
      */
     public Rule Bit() {       
 // TODO: 1 lines snipped
-throw new ece351.util.Todo351Exception();
+    	return AnyOf("01");
+//throw new ece351.util.Todo351Exception();
     }
 
 }
