@@ -15,10 +15,10 @@ fun _xnor[a,b:Var]:Var{_not[_xor[a,b]]}
 fun _nor[a,b:Var]:Var{_not[_or[a,b]]}
 fun _nand[a,b:Var]:Var{_not[_and[a,b]]}
 fun _not[a:Var]:Var{{v':Var|v'.v!=a.v}}
-one sig _a extends Var {}
-pred _x1[] {some  _not[ _a] .v}
-pred _x2[] {some  _not[ _a] .v}
+one sig _a, _b extends Var {}
+pred _l1[] {some _and[ _b, _a] .v}
+pred _l2[] {some _and[ _b, _a] .v}
 assert equivalent {
-    _x1 <=> _x2
+    _l1 <=> _l2
 }
 check equivalent
