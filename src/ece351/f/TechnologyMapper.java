@@ -201,7 +201,6 @@ public final class TechnologyMapper extends PostOrderExprVisitor {
 		node(substitutions.get(e).serialNumber(), substitutions.get(e).serialNumber(), "../../gates/and_noleads.png");
 		edge(e.left, e);
 		edge(e.right, e);
-//throw new ece351.util.Todo351Exception();
 		return e;
 	}
 
@@ -211,7 +210,6 @@ public final class TechnologyMapper extends PostOrderExprVisitor {
 		node(substitutions.get(e).serialNumber(), substitutions.get(e).serialNumber(), "../../gates/or_noleads.png");
 		edge(e.left, e);
 		edge(e.right, e);
-//throw new ece351.util.Todo351Exception();
 		return e;
 	}
 	
@@ -220,7 +218,6 @@ public final class TechnologyMapper extends PostOrderExprVisitor {
 		node(substitutions.get(e).serialNumber(), substitutions.get(e).serialNumber(), "../../gates/and_noleads.png");
 		for(Expr child: e.children)
 			edge(child, e);
-//throw new ece351.util.Todo351Exception();
 		return e;
 	}
 
@@ -229,7 +226,6 @@ public final class TechnologyMapper extends PostOrderExprVisitor {
 		node(substitutions.get(e).serialNumber(), substitutions.get(e).serialNumber(), "../../gates/or_noleads.png");
 		for(Expr child: e.children)
 			edge(child, e);
-//throw new ece351.util.Todo351Exception();
 		return e;
 	}
 
