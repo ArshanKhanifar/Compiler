@@ -97,14 +97,54 @@ public final class SimulatorGenerator extends ExprVisitor {
 		println("// write the input");
 		println("// write the output");
 // TODO: 58 lines snipped
-throw new ece351.util.Todo351Exception();
+		println("final CommandLine cmd = new CommandLine(args);");
+		println("final String input = cmd.readInputSpec();");
+		println("final WProgram wprogram = WParboiledParser.parse(input);");
+		println("final Map<String,StringBuilder> output = new LinkedHashMap<String,StringBuilder>();");
+		for(AssignmentStatement children_output: program.formulas)
+		{
+			println("output.put(\"" + children_output.outputVar.toString() + "\", new StringBuilder());");
+		}
+		println("final int timeCount = wprogram.timeCount();");
+		println("for (int time = 0; time < timeCount; time++) {");
+		Set<String> exprs = DetermineInputVars.inputVars(program);
+		for(String children_input: exprs)
+		{
+			println("final boolean in_" + children_input + " = wprogram.valueAtTime(\"" + children_input + "\", time);");
+		}
+		for(AssignmentStatement children_output: program.formulas)
+		{
+			println("final String out_" + children_output.outputVar.toString() + " = " + generateCall(children_output) + " ? \"1 \" : \"0 \";");
+			println("output.get(\"" + children_output.outputVar.toString() + "\").append(out_" + children_output.outputVar.toString() + ");");
+		}
+		println("}");
+		println("try {");
+		println("final File f = cmd.getOutputFile();");
+		println("f.getParentFile().mkdirs();");
+		println("final PrintWriter pw = new PrintWriter(new FileWriter(f));");
+		println("System.out.println(wprogram.toString());"); 
+		println("pw.println(wprogram.toString());");
+		println("System.out.println(f.getAbsolutePath());");
+		println("for (final Map.Entry<String,StringBuilder> e : output.entrySet()) {");
+		println("System.out.println(e.getKey() + \":\" + e.getValue().toString()+ \";\");");
+		println("pw.write(e.getKey() + \":\" + e.getValue().toString()+ \";\\n\"); }");
+		println("pw.close();");
+		println("} catch (final IOException e) {");
+		println("Debug.barf(e.getMessage()); }");
+//throw new ece351.util.Todo351Exception();
 		// end main method
 		outdent();
 		println("}");
 		
 		println("// methods to compute values for output pins");
 // TODO: 10 lines snipped
-throw new ece351.util.Todo351Exception();
+		for(AssignmentStatement children_output: program.formulas)
+		{
+			println(generateSignature(children_output) + " { return "); 
+			this.traverseExpr(children_output.expr);
+			println(" ; }");
+		}
+//throw new ece351.util.Todo351Exception();
 		// end class
 		outdent();
 		println("}");
@@ -191,7 +231,23 @@ throw new ece351.util.Todo351Exception();
 		b.append("(");
 		// loop over f's input variables
 // TODO: 17 lines snipped
-throw new ece351.util.Todo351Exception();
+		for(int i = 0; i < DetermineInputVars.inputVars(f).size(); i++)
+		{
+			if(i != DetermineInputVars.inputVars(f).size() - 1)
+			{
+				if(signature) {b.append("final boolean ");}
+				else {b.append("in_");}
+				b.append(DetermineInputVars.inputVars(f).toArray()[i]);
+				b.append(", ");
+			}
+			else
+			{
+				if(signature) {b.append("final boolean ");} 
+				else {b.append("in_");}
+				b.append(DetermineInputVars.inputVars(f).toArray()[i]);
+			}
+		}
+//throw new ece351.util.Todo351Exception();
 		b.append(")");
 		return b.toString();
 	}
