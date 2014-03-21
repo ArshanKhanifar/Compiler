@@ -11,11 +11,11 @@ public class TestVParser2 extends AbstractVHDLTest {
 	protected void test(final String name, final VProgram vp1) {
 		// pretty-print the input AST
 		final String pp = vp1.toString();
-		//System.out.println("pretty-print the input AS:  " + pp);
+		System.out.println("pretty-print the input AS:  " + pp);
 		// parse the pretty-print
 		final VProgram vp2 = VParser.parse(pp);
-		//final String pp1  = fp2.toString();
-		//System.out.println("pretty-print the input AS:  " + pp1);
+		final String pp1  = vp2.toString();
+		System.out.println("pretty-print the input AS:  " + pp1);
 		// check that they are the same
 		assertTrue("unexpectedly not isomorphic: " + name, vp1.isomorphic(vp2));
 		// check object contract
