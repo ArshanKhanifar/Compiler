@@ -24,7 +24,7 @@
   <path id="tests-lab-2">
     <fileset dir="${build.dir}">
       <include name="ece351/w/svg/TestW2SVG*" />
-      <include name="ece351/util/TestObjectContract.class" />
+      <include name="ece351/objectcontract/TestObjectContract.class" />
     </fileset>
   </path>
 
