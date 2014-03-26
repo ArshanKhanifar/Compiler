@@ -100,7 +100,7 @@
   <macrodef name="test">
     <attribute name="refid" />
     <sequential>
-      <junit fork="yes" timeout="10000000">
+      <junit fork="yes" timeout="100000">
         <jvmarg value="-ea" />
         <classpath>
           <path refid="classpath" />
