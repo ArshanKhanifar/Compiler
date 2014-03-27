@@ -16,8 +16,8 @@ fun _nor[a,b:Var]:Var{_not[_or[a,b]]}
 fun _nand[a,b:Var]:Var{_not[_and[a,b]]}
 fun _not[a:Var]:Var{{v':Var|v'.v!=a.v}}
 one sig _a, _b, _x, _y extends Var {}
-pred _Z1[] {some _xnor[ _and[ _x, _y] , _xnor[ _a, _b] ] .v}
-pred _Z2[] {some _xnor[ _and[ _x, _y] , _xnor[ _a, _b] ] .v}
+pred _Z1[] {some  _not[ _or[ _and[ _and[ _x, _y] ,  _not[  _not[ _or[ _and[ _a,  _not[ _b] ] , _and[  _not[ _a] , _b] ] ] ] ] , _and[  _not[ _and[ _x, _y] ] ,  _not[ _or[ _and[ _a,  _not[ _b] ] , _and[  _not[ _a] , _b] ] ] ] ] ] .v}
+pred _Z2[] {some  _not[ _or[ _and[ _and[ _x, _y] ,  _not[  _not[ _or[ _and[ _a,  _not[ _b] ] , _and[  _not[ _a] , _b] ] ] ] ] , _and[  _not[ _and[ _x, _y] ] ,  _not[ _or[ _and[ _a,  _not[ _b] ] , _and[  _not[ _a] , _b] ] ] ] ] ] .v}
 assert equivalent {
     _Z1 <=> _Z2
 }

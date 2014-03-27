@@ -43,37 +43,43 @@ public final class DeSugarer extends PostOrderExprVisitor {
 	public Expr visitXOr(final XOrExpr e) {
 		// TODO: rewrite XOR and return new expression
 // TODO: 2 lines snipped
-throw new ece351.util.Todo351Exception();
+		return new OrExpr(new AndExpr(e.left, new NotExpr(e.right)), 
+				new AndExpr(new NotExpr(e.left), e.right));
+//throw new ece351.util.Todo351Exception();
 	}
 	
 	@Override
 	public Expr visitNAnd(final NAndExpr e) {
 		// TODO: rewrite NAND and return new expression
 // TODO: 1 lines snipped
-throw new ece351.util.Todo351Exception();
+		return new NotExpr(new AndExpr(e.left, e.right));
+//throw new ece351.util.Todo351Exception();
 	}
 	
 	@Override
 	public Expr visitNOr(final NOrExpr e) {
 		// TODO: rewrite NOR and return new expression
 // TODO: 1 lines snipped
-throw new ece351.util.Todo351Exception();
+		return new NotExpr(new OrExpr(e.left, e.right));
+//throw new ece351.util.Todo351Exception();
 	}
 	
 	@Override
 	public Expr visitXNOr(final XNOrExpr e) {
 		// TODO: rewrite XNOR and return new expression
-//		return new NotExpr(new OrExpr(new AndExpr(e.left, new NotExpr(e.right)),
-//				  			new AndExpr(new NotExpr(e.left), e.right)));
+		return new NotExpr(new OrExpr(new AndExpr(e.left, new NotExpr(e.right)),
+				  			new AndExpr(new NotExpr(e.left), e.right)));
 // TODO: 5 lines snipped
-throw new ece351.util.Todo351Exception();
+//throw new ece351.util.Todo351Exception();
 	}
 
 	@Override
 	public Expr visitEqual(final EqualExpr e) {
 		//TODO: equals operator has the same truth table as xnor
 // TODO: 2 lines snipped
-throw new ece351.util.Todo351Exception();
+		return new NotExpr(new OrExpr(new AndExpr(e.left, new NotExpr(e.right)),
+	  			new AndExpr(new NotExpr(e.left), e.right)));
+//throw new ece351.util.Todo351Exception();
 	}
 
 	// these stay the same, no desugaring
