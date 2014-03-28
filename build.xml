@@ -38,7 +38,7 @@
 
   <path id="tests-lab-4">
     <fileset dir="${build.dir}">
-      <include name="ece351/f/TestSimplifier2.class" />
+      <include name="ece351/f/TestSimplifier*" />
     </fileset>
   </path>
 
