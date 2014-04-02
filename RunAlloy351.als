@@ -15,10 +15,13 @@ fun _xnor[a,b:Var]:Var{_not[_xor[a,b]]}
 fun _nor[a,b:Var]:Var{_not[_or[a,b]]}
 fun _nand[a,b:Var]:Var{_not[_and[a,b]]}
 fun _not[a:Var]:Var{{v':Var|v'.v!=a.v}}
-one sig _a, _b, _x, _y extends Var {}
-pred _Z1[] {some  _not[ _or[ _and[ _and[ _x, _y] ,  _not[  _not[ _or[ _and[ _a,  _not[ _b] ] , _and[  _not[ _a] , _b] ] ] ] ] , _and[  _not[ _and[ _x, _y] ] ,  _not[ _or[ _and[ _a,  _not[ _b] ] , _and[  _not[ _a] , _b] ] ] ] ] ] .v}
-pred _Z2[] {some  _not[ _or[ _and[ _and[ _x, _y] ,  _not[  _not[ _or[ _and[ _a,  _not[ _b] ] , _and[  _not[ _a] , _b] ] ] ] ] , _and[  _not[ _and[ _x, _y] ] ,  _not[ _or[ _and[ _a,  _not[ _b] ] , _and[  _not[ _a] , _b] ] ] ] ] ] .v}
+one sig _XNOR_testa, _XNOR_testb, _XNOR_testx, _XNOR_testy extends Var {}
+pred _XNOR_testF1[] {some  _not[ _or[ _and[ _XNOR_testx,  _not[ _XNOR_testy] ] , _and[  _not[ _XNOR_testx] , _XNOR_testy] ] ] .v}
+pred _XNOR_testZ1[] {some  _not[ _or[ _and[ _and[ _XNOR_testx, _XNOR_testy] ,  _not[  _not[ _or[ _and[ _XNOR_testa,  _not[ _XNOR_testb] ] , _and[  _not[ _XNOR_testa] , _XNOR_testb] ] ] ] ] , _and[  _not[ _and[ _XNOR_testx, _XNOR_testy] ] ,  _not[ _or[ _and[ _XNOR_testa,  _not[ _XNOR_testb] ] , _and[  _not[ _XNOR_testa] , _XNOR_testb] ] ] ] ] ] .v}
+pred _XNOR_testF2[] {some  _not[ _or[ _and[ _XNOR_testx,  _not[ _XNOR_testy] ] , _and[  _not[ _XNOR_testx] , _XNOR_testy] ] ] .v}
+pred _XNOR_testZ2[] {some  _not[ _or[ _and[ _and[ _XNOR_testx, _XNOR_testy] ,  _not[  _not[ _or[ _and[ _XNOR_testa,  _not[ _XNOR_testb] ] , _and[  _not[ _XNOR_testa] , _XNOR_testb] ] ] ] ] , _and[  _not[ _and[ _XNOR_testx, _XNOR_testy] ] ,  _not[ _or[ _and[ _XNOR_testa,  _not[ _XNOR_testb] ] , _and[  _not[ _XNOR_testa] , _XNOR_testb] ] ] ] ] ] .v}
 assert equivalent {
-    _Z1 <=> _Z2
+    _XNOR_testF1 <=> _XNOR_testF2
+    _XNOR_testZ1 <=> _XNOR_testZ2
 }
 check equivalent

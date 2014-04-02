@@ -122,7 +122,7 @@ public /*final*/ class FParboiledParser extends FBase implements VConstants {
 				    }
 				    public Rule Var() {       
 						// TODO: 1 lines snipped
-						return Sequence(TestNot(Keyword()), OneOrMore(Char()), push(new VarExpr(match())));
+						return Sequence(TestNot(Keyword()), OneOrMore(FirstOf(Char(),Digit(),Ch('_'))), push(new VarExpr(match())));
 						//throw new ece351.util.Todo351Exception();
 						}
 }

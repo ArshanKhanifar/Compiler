@@ -71,7 +71,7 @@ public Rule Program() {
 			    }
 			    public Rule Var() {       
 					// TODO: 1 lines snipped
-					return Sequence(TestNot(Keyword()), OneOrMore(Char()));
+					return Sequence(TestNot(Keyword()), OneOrMore(FirstOf(Char(),Digit(),Ch('_'))));
 					//throw new ece351.util.Todo351Exception();
 					}
 }

@@ -59,7 +59,42 @@ public final class Synthesizer extends PostOrderExprVisitor {
 		FProgram result = new FProgram();
 			// set varPrefix for this design unit
 // TODO: 22 lines snipped
-throw new ece351.util.Todo351Exception();
+
+		for(DesignUnit designunit: root.designUnits)
+		{
+			this.varPrefix = designunit.arch.entityName;
+			for(Statement statement: designunit.arch.statements)
+			{
+				if(statement instanceof Process)
+				{
+					for(Statement seqstatement: ((Process)statement).sequentialStatements)
+					{
+						if(seqstatement instanceof IfElseStatement)
+						{
+							for(AssignmentStatement child_stmt: implication((IfElseStatement)seqstatement).formulas)
+								result = result.append(child_stmt);
+						}
+						else if(seqstatement instanceof AssignmentStatement)
+						{
+								result = result.append(new AssignmentStatement((VarExpr)traverseExpr(((AssignmentStatement)seqstatement).outputVar), 
+										traverseExpr(((AssignmentStatement)seqstatement).expr)));
+						}
+					}
+				}
+				else if(statement instanceof IfElseStatement)
+				{
+					for(AssignmentStatement child_stmt: implication((IfElseStatement)statement).formulas)
+						result = result.append(child_stmt);
+				}
+				else if(statement instanceof AssignmentStatement)
+				{
+						result = result.append(new AssignmentStatement((VarExpr)traverseExpr(((AssignmentStatement)statement).outputVar), 
+								traverseExpr(((AssignmentStatement)statement).expr)));
+				}
+			}
+		}
+		return result;
+//throw new ece351.util.Todo351Exception();
 	}
 	
 	private FProgram implication(final IfElseStatement statement) {
@@ -78,7 +113,18 @@ throw new ece351.util.Todo351Exception();
 
 		// build result
 // TODO: 10 lines snipped
-throw new ece351.util.Todo351Exception();
+		FProgram result = new FProgram();
+		condCount++;
+		VarExpr condition = new VarExpr(Synthesizer.conditionPrefix + condCount);
+		result = result.append(new AssignmentStatement(condition, traverseExpr(statement.condition)));
+		NotExpr not_condition = new NotExpr(condition);
+		VarExpr outputvar = ifb.outputVar;
+		AndExpr inner_And = new AndExpr(not_condition,traverseExpr(elb.expr));
+		AndExpr outer_And = new AndExpr(traverseExpr(ifb.expr),condition);	
+		OrExpr Or = new OrExpr(inner_And,outer_And);
+		result = result.append(new AssignmentStatement((VarExpr)traverseExpr(outputvar),(Expr)Or));
+		return result;
+//throw new ece351.util.Todo351Exception();
 	}
 
 	/** Rewrite var names with prefix to mitigate name collision. */
